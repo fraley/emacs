@@ -1,0 +1,13 @@
+# http://flake8.pycqa.org/en/latest/user/configuration.html
+[flake8]
+
+# ignore = E501  do not include this one, more than 120 is too much
+max-line-length = 120
+# ignore = E305  this is taken care of by one or more of the ignore statements below
+# ignore = E731  this is taken care of by one or more of the ignore statements below
+
+# From process_python_files() of ~/sc-minipoc/skycontrol/src/git_precommit
+ignore = E402
+ignore = E265
+ignore = E7
+
