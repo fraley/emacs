@@ -6,15 +6,19 @@
 #
 # Also note:
 # When I had had problems with flake8 and this configuration file,
-# I googled and found https://github.com/jorgenschaefer/elpy/issues/1131
-# I then loaded /tmp/test/hx.py (see ~/bin/test-emacs) and did C-c C-v
-# and the flake8 problem with the configuration file was clear to me.
+# I googled and found https://github.com/jorgenschaefer/elpy/issues/1131.
+# I then loaded /tmp/test/hx.py (run ~/bin/test-emacs) and did C-c C-v
+# and the flake8 problem with the configuration file was then clear to me.
 #
 [flake8]
 
-# From process_python_files() of ~/sc-minipoc/skycontrol/src/git_precommit
-# E305,E731:  these are taken care of by one or more of the Exxx in ignore statement below
-ignore = E402,E265,E7
+# E501,E402,E265,E7 are present in process_python_files() of
+# ~/sc-minipoc/skycontrol/src/git_precommit.
+#
+# I ran into E305,E731 in qa/test_suites/acceptance/notifications/test_notifications.py
+# At one point, E305 was taken care of by one of E402,E265,E7 and it stopped working,
+# so I added E305 below.  E731 seems to be covered by one of E402,E265,E7.
+ignore = E402,E265,E7,E305
 
-# E501  do not include this one, more than 120 is too much
+# E501 do not ignore this one, more than 120 is charactes is actually too much.
 max-line-length = 120
