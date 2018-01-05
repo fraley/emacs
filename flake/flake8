@@ -1,4 +1,14 @@
 #
+# %> which flake8
+# /usr/local/bin/flake8
+#
+# As you are editing .py with emacs in 'Python Elpy' mode,
+# flake8 shows pep8 python style violations as you save C-x,C-s.
+#
+# If (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+# in .emacs, however, these violations will be corrected immediately.
+# elpy-format-code does not do the right thing, btw.
+#
 # Look at this:
 # http://flake8.pycqa.org/en/latest/
 # specifically:
