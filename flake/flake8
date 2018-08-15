@@ -5,16 +5,28 @@
 # As you are editing .py with emacs in 'Python Elpy' mode,
 # flake8 shows pep8 python style violations as you save C-x,C-s.
 #
+# ~/setup/bin/shared.sh copies these files:
+#   %> /bin/cp ~/emacs/flake/flake8 ~/emacs/flake/flake8-my-python ~/.config/flake8
+#
+# %> type flake8
+# flake8 is hashed (/usr/local/bin/flake8)
+# flake8 looks at ~/.config/flake8 for config by default.
+#
+# %> type flake8-my-python
+# flake8-my-python is aliased to `flake8 --config=~/.config/flake8-my-python'
+#
+# See reference to flake8-my-python in ~/.emacs for more on why flake8-my-python is required.
+#
 # If (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-# in .emacs, however, these violations will be corrected immediately.
-# elpy-format-code does not do the right thing, btw.
+# in .emacs, however, these violations will be corrected upon 'save'.
+# ASIDE: elpy-format-code did not work for me, so, used py-autopep8 instead.
 #
 # Look at this:
 # http://flake8.pycqa.org/en/latest/
 # specifically:
 # http://flake8.pycqa.org/en/latest/user/configuration.html
 #
-# Also note:
+# flake8 handy debugging note:
 # When I had had problems with flake8 and this configuration file,
 # I googled and found https://github.com/jorgenschaefer/elpy/issues/1131.
 # I then loaded /tmp/test/hx.py (run ~/bin/test-emacs) and did C-c C-v
@@ -22,13 +34,44 @@
 #
 [flake8]
 
-# E501,E402,E265,E7 are present in process_python_files() of
-# ~/sc-minipoc/skycontrol/src/git_precommit.
+# At a previous job, we used pep8 in git_precommit file that would get run when someone did a commit.
+# If pep8 complained, commit would fail.  Kept people from commiting code that had pep formatting errors.
+# By default, pep8 (much like flake8) warns you about everything, much of which is overly pedantic.
+# The git_precommit at that job had:
+#                pep8 --format=pylint --ignore E501,E402,E265,E7
+# This kept pep8 from complaining about E501,E402,E265,E7 upon commit.
 #
-# I ran into E305,E731 in qa/test_suites/acceptance/notifications/test_notifications.py
-# At one point, E305 was taken care of by one of E402,E265,E7 and it stopped working,
-# so I added E305 below.  E731 seems to be covered by one of E402,E265,E7.
-ignore = E402,E265,E7,E305
+# When looking at some python code at previous job in emacs (using elpy), flake8 also
+# complained about E305,E731, which apparently pep8 had, at one point, let go when this
+# file was committed.  I believe at that point, E305 was ignored by ignoring one or more
+# of these E402,E265,E7.  But this stopped working so I had to include E305 below.
+# E731, however, seems to be ignored by ignoring one or more of these E402,E265,E7.
+#
+# At newer job, they have these issues all over in their .py code.  Reformatting code is a
+# cardinal sin, so, stop complaining about these, especially when viewer their code.
+# - E127 continuation line over-indented for visual indent
+# - E211 whitespace before '('
+# - E225 missing whitespace around operator
+# - E226 missing whitespace around arithmetic operator
+# - E231 missing whitespace after ':'
+# - E241 multiple spaces after ','
+# - E265 block comment should start with #
+# - E2   all E2xxx
+# - E302 expected 2 blank lines, found 1
+# - E303 too many blank lines
+# - E305 expected 2 blank lines after end of function or class
+# - F401 ... imported but unused
+# - E402 module level import not at top of file
+# - E501 line too long
+# - E704 multiple statements on one line (def)
+# - E731 do not assign a lambda expression, use a def
+# - E7   all E7xxx
+#
+ignore = E127,E2,E302,E303,E305,F401,E402,E501,E7
 
-# E501 do not ignore this one, more than 120 is charactes is actually too much.
+# By ignoring E501 above, max-line-length setting does nothing.
+# However:
+#   -- we want this setting if E501 is ever not ignored
+#   -- default for E501 is something like 79 chars (120 is actually ok)
+#
 max-line-length = 120

@@ -1,0 +1,13 @@
+#
+# See 'flake8-my-python' in ./flake8 for more on why this file exists.
+#
+[flake8]
+
+ignore = E501
+
+# By ignoring E501 above, max-line-length setting does nothing.
+# However:
+#   -- we want this setting if E501 is ever not ignored
+#   -- default for E501 is something like 79 chars (120 is actually ok)
+#
+max-line-length = 120
