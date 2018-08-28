@@ -11,3 +11,10 @@ ignore = E501
 #   -- default for E501 is something like 79 chars (120 is actually ok)
 #
 max-line-length = 120
+
+# 'runtests' prints this in log when run:
+# Identifiers to be automatically injected into your namespace:
+#   ['_logger', 'api', 'devices', 'env_param', 'logger', 'runtests_logger', 'this_testsuite', 'topogen']
+# Keep flake from flagging these as 'F821 undefined name'.
+#
+builtins = _logger,api,devices,env_param,logger,runtests_logger,this_testsuite,topogen
