@@ -1,0 +1,59 @@
+# %> type flake8_tolerant
+# flake8_tolerant is aliased to `flake8 --config=~/.config/flake8-tolerant'
+#
+# See reference to flake8_tolerant in ~/.emacs for more on why flake8_tolerant is required.
+#
+
+[flake8]
+
+# At a previous job, we used pep8 in git_precommit file that would get run when someone did a commit.
+# If pep8 complained, commit would fail.  Kept people from commiting code that had pep formatting errors.
+# By default, pep8 (much like flake8) warns you about everything, much of which is overly pedantic.
+# The git_precommit at that job had:
+#                pep8 --format=pylint --ignore E501,E402,E265,E7
+# This kept pep8 from complaining about E501,E402,E265,E7 upon commit.
+#
+# When looking at some python code at previous job in emacs (using elpy), flake8 also
+# complained about E305,E731, which apparently pep8 had, at one point, let go when this
+# file was committed.  I believe at that point, E305 was ignored by ignoring one or more
+# of these E402,E265,E7.  But this stopped working so I had to include E305 below.
+# E731, however, seems to be ignored by ignoring one or more of these E402,E265,E7.
+#
+# At newer job, the .py is rife with the following pep8 violations.
+# I may want to edit/view such file without emacs/flake8 showing most of the file in red.
+#
+# - E127 continuation line over-indented for visual indent
+# - E211 whitespace before '('
+# - E225 missing whitespace around operator
+# - E226 missing whitespace around arithmetic operator
+# - E231 missing whitespace after ':'
+# - E241 multiple spaces after ','
+# - E265 block comment should start with #
+# - E2   all E2xxx
+# - E302 expected 2 blank lines, found 1
+# - E303 too many blank lines
+# - E305 expected 2 blank lines after end of function or class
+# - F401 ... imported but unused
+# - E402 module level import not at top of file
+# - E501 line too long
+# - E704 multiple statements on one line (def)
+# - E731 do not assign a lambda expression, use a def
+# - E7   all E7xxx
+#
+ignore = E127,E2,E302,E303,E305,F401,E402,E501,E7
+
+# By including 'ignore = E501' above, max-line-length setting does nothing.
+# However we still include the max-line-length below:
+#     - we want this setting if E501 is ever _not_ ignored
+#     - default for E501 is something like 79 chars (120 is actually ok)
+#
+max-line-length = 120
+
+# 'F821 undefined name' is a useful error.  Do NOT ignore F821.
+# However, the .py code at new job has a lot of symbols that are injected by a test runner, 'runtests'.
+# runtests prints this in log when run:
+#     Identifiers to be automatically injected into your namespace:
+#         ['_logger', 'api', 'devices', 'env_param', 'logger', 'runtests_logger', 'this_testsuite', 'topogen']
+# Keep flake from flagging the following identifiers as 'F821 undefined name'.
+#
+builtins = _logger,api,devices,env_param,logger,runtests_logger,this_testsuite,topogen
