@@ -2,8 +2,11 @@
 # %> which flake8
 # /usr/local/bin/flake8
 #
+# flake8 uses pycodestyle underneath (pycodestyle used to be called pep8)
+#
 # Showing violations in red
 # =============================================================================================
+#    Please see http://pycodestyle.pycqa.org/en/latest/intro.html#error-codes for E*, W* definitions.
 #    As you are editing .py with emacs in 'Python Elpy' mode,
 #    flake8 shows pep8 python style violations as you save C-x,C-s.
 #
@@ -35,12 +38,29 @@
 #
 [flake8]
 
-# By including 'ignore = E501' below, max-line-length setting does nothing.
-# However we still include the max-line-length below:
-#     - we want this setting if E501 is ever _not_ ignored
-#     - default for E501 is something like 79 chars (120 is actually ok)
+# E129:
+# As far as I can tell from reading these:
+#   https://github.com/hhatto/autopep8/issues/248
+#   https://github.com/PyCQA/pycodestyle/issues/126
+#   https://github.com/PyCQA/pycodestyle/issues/386
+# E125 logical indent is something most people consider a bug, but it cannot be undone.
+# E129 was introduced so it one can ignore all or some of E125.
 #
-ignore = E501
+# E265:
+# E265 says block comment should start with '# ' (good: '# foo', bad: '#foo')
+# .py code at new job is full of '#foo'.  I also find myself commenting things out
+# temporarily and I do not want add the extra space.
+#
+# E501:
+# Line too long.  I no longer ignore this.  autopep8 does a good job fixing about half of them.
+# I manually fix others. Some long lines cannot be fixed (it's a really long line, like a certificate).
+# For long lines that cannot be fixed, I add '  # noqa' to end to keep flake8 from complaining.
+#
+# max-line-length
+#   - does nothing if ignore = E501 (which is not the case here)
+#   - defaults to 79 chars (.py at new job uses 120, which happens to my preferred setting)
+#
+ignore = E129,E265
 max-line-length = 120
 
 # 'F821 undefined name' is a useful error.  Do NOT ignore F821.

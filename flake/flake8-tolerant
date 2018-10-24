@@ -1,7 +1,12 @@
-# %> type flake8_tolerant
-# flake8_tolerant is aliased to `flake8 --config=~/.config/flake8-tolerant'
 #
-# See reference to flake8_tolerant in ~/.emacs for more on why flake8_tolerant is required.
+# This file is not actually used.
+#
+# From ~/.bashrc:
+# # The --config and --append-config options on flake8 seem to be broke
+# # alias flake8_tolerant="flake8 --config=~/.config/flake8-tolerant"
+# alias flake8_tolerant="flake8 --ignore=E,W,F"
+#
+# See bad-python-mode ~/.emacs for reasons of why we need to be tolerant of bad .py.
 #
 
 [flake8]
@@ -40,7 +45,7 @@
 # - E731 do not assign a lambda expression, use a def
 # - E7   all E7xxx
 #
-ignore = E127,E2,E302,E303,E305,F401,E402,E501,E7
+ignore = E127,E129,E2,E302,E303,E305,F401,E402,E501,E7
 
 # By including 'ignore = E501' above, max-line-length setting does nothing.
 # However we still include the max-line-length below:
