@@ -1,5 +1,15 @@
 
-# FIXMEs
+# Flycheck
+
+NOTE: the arm64 directory will disappear once I stop using anything x86 on mac
+(and I stop using older version of emacs on x86)
+
+When setting up a machine (or updating emacs packages):
+1. start emacs (on macos, `arch` = 'arm64')
+1. Esc-x load-file ~/emacs/arm64/melpa.el
+1. this will populate ~/.emacs.d with packages
+
+# OLD - FIXMEs
 
 ## JSON mode format
 
@@ -11,7 +21,7 @@
 Automatcially reformat like in go mode.
 Depends on a fix for JSON mode format.
 
-# Top Ten
+# OLD - Top Ten
 
 Things that would be useful.
 
