@@ -38,6 +38,12 @@
 ;    /Users/pfraley/.emacs.d/elpa/use-package-20230426.2324/dir
 ;    /Users/pfraley/.emacs.d/elpa/use-package-20230426.2324/doclicense.info
 ;    /Users/pfraley/.emacs.d/elpa/use-package-20230426.2324/docstyle.info
+;
+; To install a new package
+; 1) add it to the list below and the do
+; 2) M-x: load-file # ~/emacs/arm64/melpa.el
+; 3) ~/bin/dirdiff ~/.emacs.d # see dirdiff above
 (package-install 'protobuf-mode)
+(package-install 'json-mode)
 
 (package-list-packages)
