@@ -20,11 +20,17 @@
 
 (package-install 'go-mode)
 
-; When you add new packages, do a dirdff beforehand and after.
-; For example:
-; %> ~/bin/dirdiff ~/.emacs.d
-; %> # edit this file, ~/emacs/arm64/melpa.el, add something like (package-install 'protobuf-mode)
-; %> ~/bin/dirdiff ~/.emacs.d
+; When looking for support for things like yaml, search google for yaml-mode.
+; Compare that with what you get when you do M-x:package-list-packages, search
+; for yaml-mode in that buffer and hit <enter> on yaml-mode.  In that example,
+; you will see the same result: https://github.com/yoshiki/yaml-mode.
+;
+; When adding new packages, do a dirdff beforehand
+; 1) ~/bin/dirdiff ~/.emacs.d # see dirdiff above
+; 2) add package to the list below, for example: (package-install 'protobuf-mode)
+; 3) M-x: load-file # ~/emacs/arm64/melpa.el
+; 4) ~/bin/dirdiff ~/.emacs.d # again, see new packages below
+;
 ; --- /tmp/dirdiff__Users_pfraley_bin.prev        2023-07-24 15:57:13
 ; +++ /tmp/dirdiff__Users_pfraley_bin.curr        2023-07-24 15:57:13
 ; @@ -41,6 +41,10 @@
@@ -39,11 +45,8 @@
 ;    /Users/pfraley/.emacs.d/elpa/use-package-20230426.2324/doclicense.info
 ;    /Users/pfraley/.emacs.d/elpa/use-package-20230426.2324/docstyle.info
 ;
-; To install a new package
-; 1) add it to the list below and the do
-; 2) M-x: load-file # ~/emacs/arm64/melpa.el
-; 3) ~/bin/dirdiff ~/.emacs.d # see dirdiff above
 (package-install 'protobuf-mode)
 (package-install 'json-mode)
+(package-install 'yaml-mode)
 
 (package-list-packages)
