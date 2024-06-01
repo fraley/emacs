@@ -65,5 +65,6 @@
 (package-install 'protobuf-mode)
 (package-install 'json-mode)
 (package-install 'yaml-mode)
+(package-install 'go-dlv)
 
 (package-list-packages)
