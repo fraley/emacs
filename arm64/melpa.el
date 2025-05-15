@@ -61,10 +61,14 @@
 ; 3) U - runs package-menu-mark-upgrades
 ; 4) x - runs package-menu-execute
 ; 5) ~/bin/dirdiff ~/.emacs.d # again, see updates to existing packages
+;
+; To validate/verify a mode, go to a buffer with a source file that puts the buffer
+; in the mode that you wish to verify and do this ^C  !  v
 
 (package-install 'protobuf-mode)
 (package-install 'json-mode)
 (package-install 'yaml-mode)
 (package-install 'go-dlv)
+(package-install 'blacken)
 
 (package-list-packages)
